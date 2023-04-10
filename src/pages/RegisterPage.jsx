@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { loginUser } from "../redux/features/user/userSlice";
-
 const footerLinks = [
   "FAQ",
   "Terms of User",
@@ -11,37 +8,24 @@ const footerLinks = [
   "Privacy",
   "Corporate Information",
 ];
-
-export default function LoginPage() {
-  const [email, setEmail] = useState(
-    localStorage.getItem("savedEmail") ? localStorage.getItem("savedEmail") : ""
-  );
+export default function RegisterPage() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [rememberME, setRememberME] = useState(
-    localStorage.getItem("savedEmail") ? true : false
-  );
+
   const dispatch = useDispatch();
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     dispatch(
-      loginUser({ name: "rafiqul bashar", email: "rafi@mail.com", uid: 6544 })
+      loginUser({
+        name: "rafiqul bashar",
+        email: "rafi@mail.com",
+        uid: 6544,
+      })
     );
   };
-  useEffect(() => {
-    if (rememberME) {
-      localStorage.setItem("savedEmail", email);
-      setRememberME(true);
-    } else {
-      localStorage.clear();
-    }
-  }, [rememberME]);
-
-  const handleRemember = (e) => {
-    setRememberME(e.target.checked);
-  };
   return (
-    <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')]">
+    <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')] bg-cover">
       <nav className="h-[8vh] px-4">
         <Link to="/">
           <img src="/logo.png" alt="logo" className="h-8" />
@@ -49,8 +33,8 @@ export default function LoginPage() {
       </nav>
 
       <main>
-        <div className="container p-4 md:p-12 md:bg-black/90 bg-cover md:mt-20 max-w-xl  ">
-          <form onSubmit={handleLogin} className="mx-auto space-y-4">
+        <div className="container p-4 md:p-12 md:bg-black/90 md:mt-20 max-w-xl  ">
+          <form onSubmit={handleRegister} className="mx-auto space-y-4">
             <h2 className="text-white font-bold text-3xl mb-2 md:text-4xl">
               Sign In
             </h2>
