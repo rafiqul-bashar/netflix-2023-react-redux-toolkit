@@ -1,5 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage, LoginPage, NotFoundPage, ProfilePage } from "./pages";
+import {
+  HomePage,
+  LoginPage,
+  NotFoundPage,
+  ProfilePage,
+  RegisterPage,
+} from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
 
 function App() {
@@ -19,6 +25,14 @@ function App() {
           element={
             <PublicRoute>
               <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegisterPage />
             </PublicRoute>
           }
         />

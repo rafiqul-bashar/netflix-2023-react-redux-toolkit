@@ -41,16 +41,16 @@ export default function LoginPage() {
     setRememberME(e.target.checked);
   };
   return (
-    <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')]">
-      <nav className="h-[8vh] px-4">
+    <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')] bg-cover">
+      <nav className="h-[12vh] p-4">
         <Link to="/">
           <img src="/logo.png" alt="logo" className="h-8" />
         </Link>
       </nav>
 
       <main>
-        <div className="container p-4 md:p-12 md:bg-black/90 bg-cover md:mt-20 max-w-xl  ">
-          <form onSubmit={handleLogin} className="mx-auto space-y-4">
+        <div className="container md:p-12 md:bg-black/90 flex items-center justify-center  max-w-xl  ">
+          <form onSubmit={handleLogin} className="mx-auto space-y-4 w-full">
             <h2 className="text-white font-bold text-3xl mb-2 md:text-4xl">
               Sign In
             </h2>

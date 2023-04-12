@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 const footerLinks = [
   "FAQ",
   "Terms of User",
@@ -10,6 +11,8 @@ const footerLinks = [
 ];
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
 
@@ -26,24 +29,32 @@ export default function RegisterPage() {
   };
   return (
     <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')] bg-cover">
-      <nav className="h-[8vh] px-4">
+      <nav className="h-[12vh] p-4">
         <Link to="/">
           <img src="/logo.png" alt="logo" className="h-8" />
         </Link>
       </nav>
 
       <main>
-        <div className="container p-4 md:p-12 md:bg-black/90 md:mt-20 max-w-xl  ">
+        <div className="container p-4 md:p-12 md:bg-black/90 flex items-center justify-center  max-w-xl  ">
           <form onSubmit={handleRegister} className="mx-auto space-y-4">
             <h2 className="text-white font-bold text-3xl mb-2 md:text-4xl">
-              Sign In
+              Register
             </h2>
+            <input
+              required
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              type="email"
+              placeholder="Enter Your Name"
+              className="p-4 bg-[#333] w-full focus:outline-none text-white "
+            />
             <input
               required
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               type="email"
-              placeholder="Enter Your Name"
+              placeholder="Enter Your Email"
               className="p-4 bg-[#333] w-full focus:outline-none text-white "
             />
             <div className="relative ">
@@ -65,25 +76,13 @@ export default function RegisterPage() {
               </button>
             </div>
             <button className="bg-[#e50914] text-white w-full p-3 font-semibold text-lg opacity-90 hover:opacity-100">
-              Sign In
+              Register
             </button>
             <div>
-              <input
-                checked={rememberME}
-                type="checkbox"
-                name="rememberME"
-                onChange={handleRemember}
-                className="mr-2 checked:text-gray-400"
-              />
-              <label htmlFor="rememberME" className="text-gray-400">
-                Remember Me
-              </label>
-              <br />
-
               <h3 className="text-gray-400 mt-1">
-                New to Netflix?{" "}
+                Already have an account?{" "}
                 <span className="text-white">
-                  <Link to="/register">Sign up now.</Link>
+                  <Link to="/login">Login Here.</Link>
                 </span>
               </h3>
             </div>
