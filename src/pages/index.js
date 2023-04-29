@@ -4,3 +4,5 @@ export { default as ProfilePage } from "./Profile";
 export { default as RegisterPage } from "./RegisterPage";
 export { default as NotFoundPage } from "./NotFoundPage";
 export { default as SingleMoviePage } from "./SingleMoviePage";
+export { default as SearchPage } from "./SearchPage";
+export { default as SearchMovieByNamePage } from "./SearchMovieByNamePage";

@@ -37,9 +37,9 @@ export default function Banner({
               <BsPlayFill /> <p className="md:text-2xl">Play</p>
             </button>
 
-            <button className="space-x-3 flex items-center bg-black/40 px-3 py-1 rounded-md">
+            {/* <button className="space-x-3 flex items-center bg-black/40 px-3 py-1 rounded-md">
               <AiOutlinePlus /> <p className="md:text-2xl">My List</p>
-            </button>
+            </button> */}
           </div>
           <h2 className="text-lg md:text-3xl font-semibold my-4">
             {movie?.title || movie?.name || movie?.original_title}

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+dotenv.config("env");
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 const app = express();

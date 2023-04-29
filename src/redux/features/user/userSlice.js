@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: JSON.parse(sessionStorage.getItem("user"))
     ? JSON.parse(sessionStorage.getItem("user"))
-    : null,
+    : {},
+  playlist: [],
 };
 
 const userSlice = createSlice({
-  name: "product",
+  name: "user",
   initialState,
   reducers: {
     // reducer here
@@ -16,11 +17,14 @@ const userSlice = createSlice({
       sessionStorage.setItem("user", JSON.stringify(action.payload));
     },
     logOutUser: (state) => {
-      state.user = null;
+      state.user = {};
       sessionStorage.clear();
+    },
+    savePlayList: (state, action) => {
+      state.playlist = action.payload;
     },
   },
 });
 
-export const { loginUser, logOutUser } = userSlice.actions;
+export const { loginUser, logOutUser, savePlayList } = userSlice.actions;
 export default userSlice.reducer;

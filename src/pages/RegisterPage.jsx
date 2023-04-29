@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../redux/features/user/userApi";
 const footerLinks = [
   "FAQ",
   "Terms of User",
@@ -12,21 +13,15 @@ const footerLinks = [
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-
-  const dispatch = useDispatch();
+  const [register, { data, isLoading, error }] = useRegisterMutation();
   const handleRegister = (e) => {
     e.preventDefault();
-    dispatch(
-      loginUser({
-        name: "rafiqul bashar",
-        email: "rafi@mail.com",
-        uid: 6544,
-      })
-    );
+    register({ fullName: name, email, password });
+    // console.log({ fullName: name, email, password });
   };
+  console.log(data?.data);
   return (
     <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')] bg-cover">
       <nav className="h-[12vh] p-4">
@@ -45,7 +40,7 @@ export default function RegisterPage() {
               required
               onChange={(e) => setName(e.target.value)}
               value={name}
-              type="email"
+              type="text"
               placeholder="Enter Your Name"
               className="p-4 bg-[#333] w-full focus:outline-none text-white "
             />
@@ -75,9 +70,20 @@ export default function RegisterPage() {
                 {showPass ? "Hide" : "Show"}
               </button>
             </div>
-            <button className="bg-[#e50914] text-white w-full p-3 font-semibold text-lg opacity-90 hover:opacity-100">
-              Register
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-[#e50914] text-white w-full p-3 font-semibold text-lg opacity-90 hover:opacity-100"
+            >
+              {isLoading ? (
+                <span className="animate-pulse">waiting to redirect ...</span>
+              ) : (
+                "Register"
+              )}
             </button>
+            <p className="text-red-500">
+              {error?.data ? error?.data?.message : ""}
+            </p>
             <div>
               <h3 className="text-gray-400 mt-1">
                 Already have an account?{" "}

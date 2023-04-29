@@ -4,7 +4,6 @@ import { Navigation, Autoplay } from "swiper";
 
 import MovieCard from "../MovieCard";
 export default function Slider({ title = "loading", movies = [] }) {
-  //   console.log(movies);
   const windowSize = useRef([window.innerWidth]);
   const [largeScreen, setLargeScreen] = React.useState(false);
   React.useEffect(() => {
@@ -33,7 +32,7 @@ export default function Slider({ title = "loading", movies = [] }) {
         modules={[Autoplay, Navigation]}
       >
         {movies?.map((el) => (
-          <SwiperSlide className="h-56" key={el?.id}>
+          <SwiperSlide className="h-60" key={el?.id}>
             <MovieCard movie={el} />
           </SwiperSlide>
         ))}

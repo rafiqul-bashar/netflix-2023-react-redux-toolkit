@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginUser } from "../redux/features/user/userSlice";
+import { useLoginMutation } from "../redux/features/user/userApi";
 
 const footerLinks = [
   "FAQ",
@@ -21,12 +20,11 @@ export default function LoginPage() {
   const [rememberME, setRememberME] = useState(
     localStorage.getItem("savedEmail") ? true : false
   );
-  const dispatch = useDispatch();
+  const [login, { isLoading, error }] = useLoginMutation();
+
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(
-      loginUser({ name: "rafiqul bashar", email: "rafi@mail.com", uid: 6544 })
-    );
+    login({ email, password });
   };
   useEffect(() => {
     if (rememberME) {
@@ -39,6 +37,10 @@ export default function LoginPage() {
 
   const handleRemember = (e) => {
     setRememberME(e.target.checked);
+  };
+  const handleCredentials = () => {
+    setEmail("rafi@mail.com");
+    setPassword("mni818");
   };
   return (
     <div className="bg-black h-screen md:bg-[url('/login-bg.jpg')] bg-cover">
@@ -80,9 +82,28 @@ export default function LoginPage() {
                 {showPass ? "Hide" : "Show"}
               </button>
             </div>
-            <button className="bg-[#e50914] text-white w-full p-3 font-semibold text-lg opacity-90 hover:opacity-100">
-              Sign In
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-[#e50914] text-white w-full p-3 font-semibold text-lg opacity-90 hover:opacity-100"
+            >
+              {isLoading ? (
+                <span className="animate-pulse">logging in...</span>
+              ) : (
+                "Sign In"
+              )}
             </button>
+            <button
+              type="button"
+              onClick={handleCredentials}
+              disabled={isLoading}
+              className="bg-[#e50914] text-white w-full p-3 font-semibold text-lg opacity-90 hover:opacity-100"
+            >
+              Get Credentials
+            </button>
+            <p className="text-red-500">
+              {error?.data ? error?.data?.message : ""}
+            </p>
             <div>
               <input
                 checked={rememberME}

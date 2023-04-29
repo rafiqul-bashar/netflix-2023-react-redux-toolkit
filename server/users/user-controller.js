@@ -1,4 +1,3 @@
-const express = require("express");
 const User = require("../models/user-model");
 
 const registerUser = async (req, res, next) => {
@@ -28,7 +27,7 @@ const registerUser = async (req, res, next) => {
     const existedUser = await User.findOne({ email });
     if (existedUser) {
       return res.status(400).json({
-        message: "Users already exist. Try to login instead.",
+        message: "User already exist. Try to login instead.",
       });
     }
     const user = new User({
@@ -37,7 +36,7 @@ const registerUser = async (req, res, next) => {
       password,
     });
     await user.save();
-    res.status(201).json({ message: "User created successfully.", data: user });
+    res.status(201).json({ message: "User created successfully.", user });
   } catch (error) {
     next(error);
   }
@@ -74,8 +73,8 @@ const loginUser = async (req, res, next) => {
         message: "Your password is incorrect.",
       });
     }
-    const token = user.generateAuthToken();
-    res.status(200).json({ token });
+
+    res.status(200).json({ user });
   } catch (error) {
     next(error);
   }
